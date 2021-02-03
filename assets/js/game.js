@@ -3,7 +3,14 @@ var playerName = window.prompt("whatis your robot's name?");
 var playerHealth = 100;
 var playerAttack = 10;
 
-var enemyName = "roberto";
+var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"];
+console.log(enemyNames[0]);
+console.log(enemyNames[1]);
+console.log(enemyNames[2]); 
+console.log(enemyNames.length);
+for(var i = 0; i < 3; i++) {
+    console.log("apple");
+}
 var enemyHealth = 50;
 var enemyAttack= 12;
 
@@ -58,4 +65,4 @@ var promptFight = window.prompt("would you like to FIGHT or SKIP this battle? en
         window.alert("You need to choose a valid option. Try again");
      }
     }; 
-    fight();
+  // fight();
