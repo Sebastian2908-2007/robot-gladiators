@@ -65,11 +65,11 @@ var fight = function(enemyName) { //fight function statements
     
 // fight enemys by looping over them and fighting one at a time
 
-var startGame = function() { //debugger;
+var startGame = function() { debugger;
  //reset player stats
  playerHealth = 200;
  playerAttack = 10;
- playerMoney = 10;
+ playerMoney = 100;
 
   for(var i = 0; i < enemyNames.length; i++) {
       if (playerHealth > 0) {
@@ -77,19 +77,32 @@ var startGame = function() { //debugger;
 
           // pick new enemy to fight based on the index of the index of the enemyNames array
           var pickedEnemyName = enemyNames[i];
-
+          
+       
           //reset enemyHealth before starting new fight
-       enemyHealth =50;
-        // use debugger to pause script from running and sheck whats going on at that moment in the code
-       // debugger;
+          enemyHealth =50;
+           // use debugger to pause script from running and sheck whats going on at that moment in the code
+          // debugger;
       
-       // pass the pickedEnemyName variables value into the fight function, where it will assume the value of enemyName parameter
-      fight(pickedEnemyName);
-      }
-    else {
-        break;
+          // pass the pickedEnemyName variables value into the fight function, where it will assume the value of enemyName parameter
+          fight(pickedEnemyName);
+          }
+          if (playerHealth > 0 && i < enemyNames.length - 1) {
+            //ask if player wants touse store before next roun      
+         var storeConfirm = window.confirm("the fight is over visit the store before next round? ");
+
+         //if yes, tale them to the store() function
+         if (storeConfirm) {
+             shop();
+         }
+         
+        }
+         
+      
+           else {
+         break;
      }
-    }
+      }
         // after the loop ends , player is either out if health or enemies to fight
        endGame();
         
@@ -116,7 +129,52 @@ var endGame = function() {
          window.alert("Thank you for playing Robot Gladiators! Come Back soon!");
      }
     };
-startGame();
+    var shop = function() {
+        var shopOptionPrompt = window.prompt(
+           "Would you like to Refill your health , Upgrade your attack , or Leave the store? Please enter one: 'REFILL' , 'UPGRADE', or 'LEAVE' to make a choice."
+        );
+        // use switch to carry out action
+        switch (shopOptionPrompt) {
+            case "REFILL":
+            case "refill":
+                if (playerMoney >= 7) {
+                window.alert("Refilling player's health by 20 for 7 dollars.");
 
-    //make var for each new  operator
-    //create a function
+                // increase health and decrease money
+                playerHealth = playerHealth + 20;
+                playerMoney = playerMoney - 7;
+                }
+                else {
+                    window.alert("you don't have enough money!");
+                }
+                break;
+                case "UPGRADE":
+                case "upgrade":
+                    if (playerMoney >= 7) {
+                    window.alert("Upgrading player's attack by 6 for 7 dollars.");
+
+                    // increase attack and decrease money
+                    playerAttack = playerAttack + 6;
+                    playerMoney = playerMoney - 7;
+                    }
+                    else {
+                        window.alert("you don't have enough money!");
+                    }
+                    break;
+                    case"LEAVE":
+                    case "leave":
+                        window.alert("Leaving the store.");
+
+                        //do nothing , so function will end
+                        break;
+                    default:
+                        window.alert("you did not pick a valid option try again.");
+
+                        // call shop again to force the player to pick a valid option
+                        shop();
+                        break;
+        }
+    };
+
+
+startGame();
