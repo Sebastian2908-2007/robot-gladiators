@@ -1,7 +1,7 @@
 var playerName = window.prompt("whatis your robot's name?");
 var playerMoney= 10;
-var playerHealth = 12;
-var playerAttack = 25;
+var playerHealth = 200;
+var playerAttack = 50;
 
 var enemyNames = ["Roborto", "Amy Android", "Robo Trumble"]; console.log(enemyNames); 
 var enemyHealth = 50;
@@ -64,6 +64,13 @@ var fight = function(enemyName) { //fight function statements
     };
     
 // fight enemys by looping over them and fighting one at a time
+
+var startGame = function() { //debugger;
+ //reset player stats
+ playerHealth = 200;
+ playerAttack = 10;
+ playerMoney = 10;
+
   for(var i = 0; i < enemyNames.length; i++) {
       if (playerHealth > 0) {
           window.alert("Welcome to robot Gladiators! round " + (i + 1) );
@@ -79,7 +86,37 @@ var fight = function(enemyName) { //fight function statements
        // pass the pickedEnemyName variables value into the fight function, where it will assume the value of enemyName parameter
       fight(pickedEnemyName);
       }
-      else {
-          window.alert("you have lost your robot in battle ! Game over!" );
-      }
+    else {
+        break;
+     }
     }
+        // after the loop ends , player is either out if health or enemies to fight
+       endGame();
+        
+};
+
+  
+//function to end entire game
+var endGame = function() {
+    // if player is still alive, player wins
+     if (playerHealth > 0) {
+         window.alert("Great job , you've survived the game! you now have a score of" + playerMoney + ".");
+     }
+        else {
+         window.alert("You've lost your robot in battle");
+     }
+     // asl player if they'd  like to play again
+     var playAgainConfirm = window.confirm("Would you like to play again?");
+
+     if (playAgainConfirm) {
+         // restart the game
+         startGame();
+     }
+     else {
+         window.alert("Thank you for playing Robot Gladiators! Come Back soon!");
+     }
+    };
+startGame();
+
+    //make var for each new  operator
+    //create a function
