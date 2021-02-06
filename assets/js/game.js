@@ -15,8 +15,10 @@ var fight = function(enemy) {
             if (confirmSkip) {
                 window.alert(playerInfo.name + "has decided to skip this fight. goodbye!");
                 // subtract money from playerMoney for skipping
-                playerInfo.money = math.max(0, playerInfo.money - 10)
-                console.log("playerInfo.money", playerInfo.money);
+                playerInfo.money = playerInfo.money - 10
+               // playerInfo.money = math.max(0, playerInfo.money - 10)
+                //console.log("playerInfo.money", playerInfo.money);
+                shop();
                 break;
             }
         }
@@ -58,13 +60,14 @@ var fight = function(enemy) {
     
 // fight enemys by looping over them and fighting one at a time
 
-var startGame = function() { debugger;
+var startGame = function() { //debugger;
  //reset player stats
  playerInfo.reset();
 
   for(var i = 0; i < enemyInfo.length; i++) {
       if (playerInfo.health > 0) {
           window.alert("Welcome to robot Gladiators! round " + (i + 1) );
+         // debugger;
 
           // pick new enemy to fight based on the index of the index of the enemy.names array
           var pickedEnemyObj = enemyInfo[i];
@@ -154,8 +157,18 @@ var endGame = function() {
 
         return value;
     };
+    var getPlayerName = function() {
+
+while (name === "" || name === null) {
+    name = prompt("what is your robots name?");
+}
+
+        console.log("your robots name is" + name);
+        return name; 
+
+    };
     var playerInfo = {
-        name: window.prompt("what is your Robots name?"),
+        name: getPlayerName(),
         health: 100,
         attack: 10,
         money: 10,
