@@ -44,13 +44,22 @@ var startGame = function() { //debugger;
    
 //function to end entire game
 var endGame = function() {
-    // if player is still alive, player wins
-     if (playerInfo.health > 0) {
-         window.alert("Great job , you've survived the game! you now have a score of" + playerInfo.money + ".");
+    // if player is still alive, check high score using local storage
+     window.alert("the game has ended lets see how you did!");
+     var highScore = localStorage.getItem("highscore");
+     if (highScore === null) {
+         highScore = 0;
      }
-        else {
-         window.alert("You've lost your robot in battle");
+     // if player has more money than highscore then player gets high score
+     if (playerInfo.money > highScore) {
+         localStorage.setItem("highscore", playerInfo.money);
+         localStorage.setItem("name", playerInfo.name);
+
+         alert(playerInfo.name + "now has the hiigh score of " + playerInfo.money + "!");
      }
+      else {
+          alert(playerInfo.name + "did not beat the high score of " + highScore + ".maybe next time");
+      }
      // asl player if they'd  like to play again
      var playAgainConfirm = window.confirm("Would you like to play again?");
 
@@ -241,7 +250,7 @@ var name = "";
             var playerInfo = {
                 name: getPlayerName(),
                 health: 100,
-                attack: 10,
+                attack: 50,
                 money: 10,
                 reset: function() {
                     this.health = 100;
